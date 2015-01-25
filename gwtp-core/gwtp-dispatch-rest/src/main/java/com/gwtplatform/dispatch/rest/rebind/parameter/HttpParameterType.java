@@ -32,7 +32,8 @@ public enum HttpParameterType {
     PATH(PathParam.class, Type.PATH),
     QUERY(QueryParam.class, Type.QUERY),
     FORM(FormParam.class, Type.FORM),
-    COOKIE(CookieParam.class, Type.COOKIE);
+    COOKIE(CookieParam.class, Type.COOKIE),
+    MATRIX(CookieParam.class, Type.MATRIX);
 
     private final Class<? extends Annotation> annotationClass;
     private final Type associatedType;

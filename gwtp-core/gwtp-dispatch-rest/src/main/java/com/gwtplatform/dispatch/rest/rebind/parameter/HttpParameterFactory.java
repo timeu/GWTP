@@ -199,11 +199,17 @@ public class HttpParameterFactory {
 
     private boolean validateResolverExistence(JParameter parameter) {
         HttpParameterType type = findParameterType(parameter);
-        HttpParamValueResolver<?> resolver = getResolverForType(type);
-        boolean exists = resolver != null;
+        boolean exists = type != null;
 
-        if (!exists) {
-            error(parameter, NO_VALUE_RESOLVER);
+        // null type may represent a body param.
+        if (exists) {
+            HttpParamValueResolver<?> resolver = getResolverForType(type);
+            exists = resolver != null;
+
+            // so we warn only if it haas a type and no resolver
+            if (!exists) {
+                error(parameter, NO_VALUE_RESOLVER);
+            }
         }
 
         return exists;
